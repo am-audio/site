@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaBullhorn, FaMusic, FaTv, FaCameraRetro, FaSlidersH, FaVideo } from 'react-icons/fa';
 import {
   BrowserRouter as Router,
   Routes,
@@ -30,12 +31,12 @@ function Equalizer() {
 }
 
 const SERVICES = [
-  { icon: "🔊", title: "Sub & Amp Install" },
-  { icon: "🎶", title: "Speaker Upgrade" },
-  { icon: "📻", title: "Head Unit Install" },
-  { icon: "🎥", title: "Backup Camera" },
-  { icon: "🛠️", title: "System Tuning" },
-  { icon: "💬", title: "Virtual Audio Consult" },
+  { icon: <FaBullhorn size={32} />, title: 'Sub & Amp Install' },
+  { icon: <FaMusic size={32} />, title: 'Speaker Upgrade' },
+  { icon: <FaTv size={32} />, title: 'Head Unit Install' },
+  { icon: <FaCameraRetro size={32} />, title: 'Backup Camera' },
+  { icon: <FaSlidersH size={32} />, title: 'System Tuning' },
+  { icon: <FaVideo size={32} />, title: 'Virtual Audio Consult' }
 ];
 
 const MY_PICKS = {
