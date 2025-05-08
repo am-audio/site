@@ -40,17 +40,64 @@ const SERVICES = [
 ];
 
 const MY_PICKS = {
-  Premium: [
-    { name: "Hertz Mille Pro MPX-165.3", link: "#" },
-    { name: "Sony Mobile ES XS-162ES", link: "#" },
-    { name: "Memphis VIV60CV2", link: "#" },
-  ],
-  Budget: [
-    { name: "Kicker 46CSC654", link: "#" },
-    { name: "Rockford Fosgate P1694", link: "#" },
-    { name: "Pioneer TS-A1670F", link: "#" },
-  ],
+  Premium: {
+    Speakers: [
+      {
+        name: "Hertz Mille Pro MPX-165.3",
+        link:"https://www.amazon.com/HERTZ-MPX-1653-Two-Way-Coaxial-Speakers/dp/B01AC0YVPC?tag=amaudio614-20"
+      },
+      {
+        name: "Sony Mobile ES XS-162ES",
+        link:"https://www.amazon.com/Sony-XS162ES-Mobile-Component-Speakers/dp/B0CBX84DBF?tag=amaudio614-20"
+      },
+      {
+        name: "Memphis VIV60CV2",
+        link:"https://www.amazon.com/Memphis-Audio-VIV60CV2-Component-Speakers/dp/B013SPTO6Y?tag=amaudio614-20"
+      }
+    ],
+    Amplifiers: [
+      {
+        name: "Memphis VIV400.4V2",
+        link: "https://amzn.to/43kHQ2N"
+      },
+      {
+        name: "Memphis MJP3000.1",
+        link: "https://amzn.to/4dbFfvp"
+      }
+    ],
+    "Head Units": [
+      {
+        name: "Sony XAV-AX6000",
+        link:"https://amzn.to/3GNGKE3"
+      },
+      {
+        name: "Sony XAV-AX4000",
+        link: "https://amzn.to/44vjTXM"
+      }
+    ]
+  },
+  Budget: {
+    Speakers: [
+      {
+        name: "Kicker 46CSC654",
+        link:"https://www.amazon.com/Kicker-46CSC654-Component-Speakers/dp/B01M8POT5C?tag=amaudio614-20"
+      }
+    ],
+    Amplifiers: [
+      {
+        name: "Rockford Fosgate P1694",
+        link:"https://www.amazon.com/Rockford-Fosgate-P1694-Speaker-Black/dp/B00TS2ZZL0?tag=amaudio614-20"
+      }
+    ],
+    "Head Units": [
+      {
+        name: "Pioneer TS-A1670F",
+        link:"https://www.amazon.com/Pioneer-TS-A1670F-6-5-Inch-Component-Speaker/dp/B00NEK90FM?tag=amaudio614-20"
+      }
+    ]
+  }
 };
+
 
 const PRICING = [
   { service: "Sub & Amp Install", price: "$150" },
@@ -143,41 +190,46 @@ function MyPicks() {
   const tierKey = tierParam
     ? tierParam.charAt(0).toUpperCase() + tierParam.slice(1)
     : null;
-  const picksToShow = tierKey && MY_PICKS[tierKey] ? MY_PICKS[tierKey] : null;
-  const entries = picksToShow
-    ? [[tierKey, picksToShow]]
-    : Object.entries(MY_PICKS);
+  const tiersToShow = tierKey && MY_PICKS[tierKey]
+    ? { [tierKey]: MY_PICKS[tierKey] }
+    : MY_PICKS;
 
   return (
     <div className="container mx-auto px-4 py-12 text-gray-200">
-      <h2 className="text-2xl md:text-4xl mb-6">My Picks</h2>
-      {entries.map(([key, list]) => (
-        <div key={key} className="mb-8">
-          <h3 className="text-xl md:text-2xl mb-4">{key} Picks</h3>
-          <div className="grid md:grid-cols-2 gap-6">
-            {list.map((item, idx) => (
-              <div
-                key={idx}
-                className="flex justify-between items-center p-4 bg-[#2a2a2a] rounded-lg"
-              >
-                <span>{item.name}</span>
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-red-400 hover:underline"
-                >
-                  View
-                </a>
+      <h2 className="text-center text-2xl md:text-4xl mb-6">My Picks</h2>
+      {Object.entries(tiersToShow).map(([tier, categories]) => (
+        <div key={tier} className="mb-12">
+          <h3 className="text-xl md:text-2xl mb-4 text-red-600">{tier} Picks</h3>
+          {Object.entries(categories).map(([category, items]) => (
+            <div key={category} className="mb-8">
+              <h4 className="text-lg mb-2">{category}</h4>
+              <div className="grid md:grid-cols-2 gap-6">
+                {items.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="flex justify-between items-center p-4 bg-[#2a2a2a] rounded-lg"
+                  >
+                    <span>{item.name}</span>
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-red-500 hover:underline"
+                    >
+                      View on Amazon
+                    </a>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       ))}
       <Equalizer />
     </div>
   );
 }
+
 
 function About() {
   return (
