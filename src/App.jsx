@@ -1,163 +1,249 @@
-// App.jsx
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, NavLink, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  NavLink,
+  Navigate,
+  useLocation
+} from "react-router-dom";
+
+// Equalizer component for consistent bars across all pages
+function Equalizer() {
+  const barCount = 12;
+  return (
+    <div className="hidden sm:flex justify-between items-center px-4 sm:px-8 opacity-20 pointer-events-none">
+      {Array.from({ length: barCount }).map((_, i) => (
+        <div
+          key={i}
+          style={{
+            width: "3px",
+            height: "100px",
+            backgroundColor: i % 4 === 0 ? "#e53e3e" : "#888",
+            transformOrigin: "bottom",
+            animation: `equalizer 1.2s ${i * 0.08}s infinite ease-in-out`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
 const SERVICES = [
-  { icon: '🔊', title: 'Sub & Amp Install' },
-  { icon: '🎶', title: 'Speaker Upgrade' },
-  { icon: '📻', title: 'Head Unit Install' },
-  { icon: '🎥', title: 'Backup Camera' },
-  { icon: '🛠️', title: 'System Tuning' },
-  { icon: '💬', title: 'Virtual Audio Consult' }
+  { icon: "🔊", title: "Sub & Amp Install" },
+  { icon: "🎶", title: "Speaker Upgrade" },
+  { icon: "📻", title: "Head Unit Install" },
+  { icon: "🎥", title: "Backup Camera" },
+  { icon: "🛠️", title: "System Tuning" },
+  { icon: "💬", title: "Virtual Audio Consult" },
 ];
 
-const PREMIUM_PICKS = [
-  { name: 'Hertz Mille Pro MPX-165.3', link: 'https://www.amazon.com/HERTZ-MPX-1653-Two-Way-Coaxial-Speakers/dp/B01AC0YVPC?tag=amaudio614-20' },
-  { name: 'Sony Mobile ES XS-162ES', link: 'https://www.amazon.com/Sony-XS162ES-Mobile-Component-Speakers/dp/B0CBX84DBF?tag=amaudio614-20' },
-  { name: 'Memphis VIV60CV2', link: 'https://www.amazon.com/Memphis-Audio-VIV60CV2-Component-Speakers/dp/B013SPTO6Y?tag=amaudio614-20' }
-];
+const MY_PICKS = {
+  Premium: [
+    { name: "Hertz Mille Pro MPX-165.3", link: "#" },
+    { name: "Sony Mobile ES XS-162ES", link: "#" },
+    { name: "Memphis VIV60CV2", link: "#" },
+  ],
+  Budget: [
+    { name: "Kicker 46CSC654", link: "#" },
+    { name: "Rockford Fosgate P1694", link: "#" },
+    { name: "Pioneer TS-A1670F", link: "#" },
+  ],
+};
 
 const PRICING = [
-  { service: 'Sub & Amp Install', price: '$150' },
-  { service: 'Door Speaker Install (Front Only)', price: '$90' },
-  { service: 'Door Speaker Install (Rear Only)', price: '$90' },
-  { service: 'Door Speaker Install (Front & Rear)', price: '$150' },
-  { service: 'Head Unit Install', price: '$100' },
-  { service: 'Backup Camera Install', price: '$100' },
-  { service: 'Troubleshooting / Tuning', price: '$60 (flat rate)' },
-  { service: 'Virtual Audio Consult', price: '$20 for 30 minutes' }
+  { service: "Sub & Amp Install", price: "$150" },
+  { service: "Door Speaker Install (Front Only)", price: "$90" },
+  { service: "Door Speaker Install (Rear Only)", price: "$90" },
+  { service: "Door Speaker Install (Front & Rear)", price: "$150" },
+  { service: "Head Unit Install", price: "$100" },
+  { service: "Backup Camera Install", price: "$100" },
+  { service: "Troubleshooting / Tuning", price: "$60 (flat rate)" },
+  { service: "Virtual Audio Consult", price: "$20 for 30 minutes" },
 ];
 
 const navItems = [
-  { label: 'Home', path: '/' },
-  { label: 'Services', path: '/services' },
-  { label: 'Premium Picks', path: '/premiumpicks' },
-  { label: 'Pricing', path: '/pricing' },
-  { label: 'Contact', path: '/contact' },
-  { label: 'About Me', path: '/about' }
+  { label: "Home", path: "/" },
+  { label: "Services", path: "/services" },
+  { label: "My Picks", path: "/mypicks" },
+  { label: "Pricing", path: "/pricing" },
+  { label: "Contact", path: "/contact" },
+  { label: "About Me", path: "/about" },
 ];
 
 function LandingPage() {
   return (
-    <section className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-[#2b2b2b] to-[#1a1a1a] text-center text-gray-200 px-4 relative z-10">
-      <h1 className="text-6xl font-extrabold mb-4">A &amp; M Audio</h1>
-      <p className="text-xl mb-8">Premium mobile car &amp; motorcycle audio installs.</p>
-      <div className="space-x-4">
-        <NavLink to="/services" className="px-6 py-3 bg-[#888] rounded-lg hover:bg-[#aaa] transition">
-          Services
-        </NavLink>
-        <NavLink to="/pricing" className="px-6 py-3 bg-[#aaa] text-gray-900 rounded-lg hover:bg-[#888] transition">
-          Pricing
-        </NavLink>
+    <>
+      <section className="relative w-full">
+        {/* Hero image */}
+        <img
+          src="/hero.png"
+          alt="A & M Audio hero"
+          className="w-full h-auto block"
+        />
+
+        {/* Desktop-only overlay buttons */}
+        <div className="absolute inset-0 px-4 hidden sm:flex items-center justify-center">
+          <div className="flex gap-6 w-full max-w-md">
+            <NavLink
+              to="/services"
+              className="flex-1 text-center px-4 py-2 text-base bg-white text-gray-900 rounded-lg hover:bg-gray-200 transition"
+            >
+              Services
+            </NavLink>
+            <NavLink
+              to="/pricing"
+              className="flex-1 text-center px-4 py-2 text-base bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+            >
+              Pricing
+            </NavLink>
+          </div>
+        </div>
+      </section>
+
+      {/* Intro copy below the hero */}
+      <section className="container mx-auto px-4 py-12">
+        <div className="bg-[#1a1a1a] p-8 rounded-lg max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl leading-relaxed text-gray-100">
+            After honing my skills at several leading car-audio installation shops, I brought the same discipline and attention to detail I learned in the military to found A&nbsp;&amp;&nbsp;M Audio. As a veteran-owned business, I specialize in clean, hidden wiring, precision subwoofer and amplifier installs, and seamless head-unit integrations. Every system is custom-tuned to your listening preferences, and I stand behind each install with a 100% satisfaction guarantee.
+          </p>
+        </div>
+      </section>
+
+      <Equalizer />
+    </>
+  );
+}
+
+
+function Services() {
+  return (
+    <div className="container mx-auto px-4 py-12 text-gray-200">
+      <h2 className="text-2xl md:text-4xl mb-6">Our Services</h2>
+      <div className="grid md:grid-cols-2 gap-6 mb-8">
+        {SERVICES.map((s, i) => (
+          <div
+            key={i}
+            className="flex items-center space-x-4 p-4 bg-[#2a2a2a] rounded-lg"
+          >
+            <span className="text-3xl">{s.icon}</span>
+            <span className="text-lg">{s.title}</span>
+          </div>
+        ))}
       </div>
-    </section>
+      <Equalizer />
+    </div>
+  );
+}
+
+function MyPicks() {
+  const { search } = useLocation();
+  const tierParam = new URLSearchParams(search).get("tier");
+  const tierKey = tierParam
+    ? tierParam.charAt(0).toUpperCase() + tierParam.slice(1)
+    : null;
+  const picksToShow = tierKey && MY_PICKS[tierKey] ? MY_PICKS[tierKey] : null;
+  const entries = picksToShow
+    ? [[tierKey, picksToShow]]
+    : Object.entries(MY_PICKS);
+
+  return (
+    <div className="container mx-auto px-4 py-12 text-gray-200">
+      <h2 className="text-2xl md:text-4xl mb-6">My Picks</h2>
+      {entries.map(([key, list]) => (
+        <div key={key} className="mb-8">
+          <h3 className="text-xl md:text-2xl mb-4">{key} Picks</h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            {list.map((item, idx) => (
+              <div
+                key={idx}
+                className="flex justify-between items-center p-4 bg-[#2a2a2a] rounded-lg"
+              >
+                <span>{item.name}</span>
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-red-400 hover:underline"
+                >
+                  View
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+      <Equalizer />
+    </div>
   );
 }
 
 function About() {
   return (
-    <div className="container mx-auto px-6 py-12 relative z-10">
-      <h2 className="text-3xl text-gray-200 mb-6">About Me</h2>
-      <p className="text-gray-300 mb-4">
-        Hello, I’m Austin, the driving force behind A &amp; M Audio. After serving in the military, I channelled my discipline and attention to detail into a hobbyist passion: crafting immersive audio experiences for cars and motorcycles.
+    <div className="container mx-auto px-4 py-12 text-gray-200">
+      <h2 className="text-2xl md:text-4xl mb-6">About Me</h2>
+      <p className="mb-4">
+        Hello, I’m Austin, the driving force behind A &amp; M Audio. My passion
+        for high-quality audio systems stems from my military discipline and
+        precision.
       </p>
-      <p className="text-gray-300 mb-4">
-        Over several years I’ve honed installations from high-powered subs and amplifiers to seamless head-unit integrations, focusing on clean cable management, optimized tuning, and personalized consultations.
-      </p>
-      <p className="text-gray-300 mb-4">
-        As a veteran, I bring integrity, commitment, and reliability to every project. My goal is to elevate your driving experience with crystal-clear, tailored sound.
-      </p>
-      <p className="text-gray-300">
-        Ready to transform your ride? Explore my services, check out top gear picks, or reach out via the contact form. Let’s make your next drive unforgettable.
-      </p>
-    </div>
-  );
-}
-
-function Services() {
-  return (
-    <div className="container mx-auto px-6 py-12 relative z-10">
-      <h2 className="text-3xl text-gray-200 mb-6">Our Services</h2>
-      <ul className="space-y-4">
-        {SERVICES.map((s, i) => (
-          <li key={i} className="flex items-center space-x-4 p-4 bg-[#2a2a2a] rounded hover:bg-[#333] transition">
-            <span className="text-4xl text-[#e53e3e]">{s.icon}</span>
-            <span className="text-xl text-gray-100">{s.title}</span>
-          </li>
-        ))}
+      <ul className="list-disc list-inside space-y-2 mb-6">
+        <li>Veteran-owned business</li>
+        <li>Expert sub/amp and head unit installations</li>
+        <li>Clean, hidden wiring and custom tuning</li>
       </ul>
-    </div>
-  );
-}
-
-function Picks() {
-  return (
-    <div className="container mx-auto px-6 py-12 relative z-10">
-      <h2 className="text-3xl text-gray-200 mb-6">Premium Picks</h2>
-      <ol className="list-decimal list-inside space-y-4">
-        {PREMIUM_PICKS.map((p, i) => (
-          <li key={i} className="flex justify-between items-center p-4 bg-[#2a2a2a] rounded hover:bg-[#333] transition">
-            <span className="text-lg text-gray-100">{p.name}</span>
-            <a
-              href={p.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 bg-[#888] text-gray-100 rounded hover:bg-[#aaa] transition"
-            >
-              View
-            </a>
-          </li>
-        ))}
-      </ol>
+      <Equalizer />
     </div>
   );
 }
 
 function Pricing() {
   return (
-    <div className="container mx-auto px-6 py-12 relative z-10">
-      <h2 className="text-3xl text-gray-200 mb-6">Pricing</h2>
-      <table className="w-full text-left text-gray-100">
+    <div className="container mx-auto px-4 py-12 text-gray-200">
+      <h2 className="text-2xl md:text-4xl mb-6">Pricing</h2>
+      <table className="w-full text-left mb-8">
         <thead>
-          <tr className="border-b border-gray-600">
+          <tr className="border-b border-gray-700">
             <th className="pb-2">Service</th>
             <th className="pb-2">Price</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-700">
+        <tbody>
           {PRICING.map((item, idx) => (
-            <tr key={idx}>
+            <tr key={idx} className="border-b border-gray-700">
               <td className="py-2">{item.service}</td>
               <td className="py-2">{item.price}</td>
             </tr>
           ))}
         </tbody>
       </table>
+      <Equalizer />
     </div>
   );
 }
 
 function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
-  const handleSubmit = e => {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, message } = form;
     window.location.href = `mailto:austinlm132@gmail.com?subject=${encodeURIComponent(
-      'Contact from ' + name
-    )}&body=${encodeURIComponent(message + '\n\nEmail: ' + email)}`;
+      "Contact from " + name
+    )}&body=${encodeURIComponent(message + " Email: " + email)}`;
   };
 
   return (
-    <div className="container mx-auto px-6 py-12 relative z-10 text-gray-200">
-      <h2 className="text-3xl mb-6">Contact &amp; Inquiries</h2>
-      <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4">
+    <div className="container mx-auto px-4 py-12 text-gray-200">
+      <h2 className="text-2xl md:text-4xl mb-6">Contact &amp; Inquiries</h2>
+      <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4 mb-8">
         <input
           name="name"
           onChange={handleChange}
           required
           placeholder="Your Name"
-          className="w-full p-3 bg-[#2a2a2a] rounded text-gray-200"
+          className="w-full p-3 bg-[#2a2a2a] rounded text-gray-200 focus:outline-none"
         />
         <input
           name="email"
@@ -165,7 +251,7 @@ function Contact() {
           onChange={handleChange}
           required
           placeholder="Your Email"
-          className="w-full p-3 bg-[#2a2a2a] rounded text-gray-200"
+          className="w-full p-3 bg-[#2a2a2a] rounded text-gray-200 focus:outline-none"
         />
         <textarea
           name="message"
@@ -173,65 +259,83 @@ function Contact() {
           required
           placeholder="Your Message"
           rows="4"
-          className="w-full p-3 bg-[#2a2a2a] rounded text-gray-200"
+          className="w-full p-3 bg-[#2a2a2a] rounded text-gray-200 focus:outline-none"
         />
-        <button type="submit" className="w-full py-3 bg-[#888] rounded hover:bg-[#aaa] transition">
+        <button
+          type="submit"
+          className="w-full py-3 bg-red-600 rounded hover:bg-red-700 transition text-white"
+        >
           Send Message
         </button>
       </form>
-      <div className="mt-8 text-center text-gray-400">
-        <p>Serving Columbus, OH • Mobile Car &amp; Motorcycle Audio</p>
-        <div className="flex justify-center space-x-6 mt-4">
-          <a href="https://facebook.com/amaudiocolumbus" className="hover:text-gray-200 transition">
-            Facebook
-          </a>
-          <a href="https://instagram.com/amaudio614" className="hover:text-gray-200 transition">
-            Instagram
-          </a>
-        </div>
-      </div>
+      <Equalizer />
     </div>
   );
 }
 
 export default function AandMAudioSite() {
-  const barCount = 16;
-  return (
-    <div className="relative bg-gradient-to-br from-[#2b2b2b] to-[#1a1a1a] text-gray-100 min-h-screen overflow-hidden">
-      <style>{`@keyframes equalizer {0%,100%{transform:scaleY(0.5)}50%{transform:scaleY(1)}}`}</style>
-      <div className="absolute inset-0 flex justify-between items-center px-8 opacity-20 pointer-events-none">
-        {Array.from({ length: barCount }).map((_, i) => (
-          <div
-            key={i}
-            style={{
-              width: '4px',
-              height: '120px',
-              backgroundColor: i % 5 === 0 ? '#c53030' : '#888',
-              transformOrigin: 'bottom',
-              animation: `equalizer 1.2s ${i * 0.1}s infinite ease-in-out`,
-            }}
-          />
-        ))}
-      </div>
+  const [navOpen, setNavOpen] = useState(false);
+  const [picksOpen, setPicksOpen] = useState(false);
 
-      <Router>
-        <nav className="bg-transparent text-gray-100 px-6 py-4 flex space-x-8 relative z-10">
-          {navItems.map(({ label, path }) => (
-            <NavLink key={path} to={path} className={({ isActive }) => (isActive ? 'text-[#c53030]' : 'hover:text-[#c53030]')}>
-              {label}
-            </NavLink>
-          ))}
-        </nav>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/premiumpicks" element={<Picks />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/about" element={<About />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Router>
+  return (
+    <Router>
+      <div className="relative bg-gradient-to-br from-[#2b2b2b] to-[#1a1a1a] min-h-screen overflow-hidden text-gray-200">
+        <style>
+          {`@keyframes equalizer {0%,100%{transform:scaleY(0.5)}50%{transform:scaleY(1)}}`}
+        </style>
+        <header className="relative z-10">
+  <nav className="flex flex-col sm:flex-row items-center justify-between px-4 py-3 sm:px-6 lg:px-8 bg-[#1c1c1c]">
+    <div className="flex items-center justify-between w-full sm:w-auto">
+      <div className="text-xl font-bold text-gray-200">A &amp; M Audio</div>
+      <button
+        onClick={() => setNavOpen(!navOpen)}
+        className="sm:hidden text-gray-200"
+        aria-label="Toggle menu"
+      >
+        {navOpen ? '✕' : '☰'}
+      </button>
     </div>
+
+    {/* This <ul> now lives in the normal flow, so opening it pushes content down */}
+    <ul
+      className={`transition-all duration-300 ease-in-out
+        overflow-hidden
+        ${navOpen ? 'max-h-screen py-4' : 'max-h-0'}
+        sm:max-h-full sm:py-0
+        sm:flex sm:flex-row sm:space-x-6`}
+    >
+      {navItems.map(({ label, path }) => (
+        <li key={path} className="px-2">
+          <NavLink
+            to={path}
+            className={({ isActive }) =>
+              `block text-gray-200 ${
+                isActive ? 'text-red-500' : 'hover:text-red-500'
+              }`
+            }
+            onClick={() => setNavOpen(false)}
+          >
+            {label}
+          </NavLink>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+
+        <main className="pt-8">
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/mypicks" element={<MyPicks />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
