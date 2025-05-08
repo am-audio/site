@@ -275,7 +275,6 @@ function Contact() {
 
 export default function AandMAudioSite() {
   const [navOpen, setNavOpen] = useState(false);
-  const [picksOpen, setPicksOpen] = useState(false);
 
   return (
     <Router>
