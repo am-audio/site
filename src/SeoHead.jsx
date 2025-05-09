@@ -10,8 +10,8 @@ export default function SeoHead() {
         property="og:description"
         content="Professional car audio installs—from head units to full-system overhauls. Click to book your service!"
       />
-      <meta property="og:image" content={window.location.origin + '/preview-image.png'} />
-      <meta property="og:url" content={window.location.origin + '/'} />
+      <meta property="og:image" content={'https://am-audio.netlify.app/hero.png'} />
+      <meta property="og:url" content={'https://am-audio.netlify.app/'} />
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary_large_image" />
     </Helmet>
