@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from 'react-helmet';
 import { FaTv, FaBullhorn, FaBolt, FaMusic, FaCameraRetro, FaSlidersH, FaVideo, FaBoxOpen } from 'react-icons/fa';
 import {
   BrowserRouter as Router,
@@ -8,6 +9,7 @@ import {
   Navigate,
   useLocation
 } from "react-router-dom";
+import SeoHead from './SeoHead';
 
 // Equalizer component for consistent bars across all pages
 function Equalizer() {
@@ -410,50 +412,46 @@ export default function AandMAudioSite() {
   const [navOpen, setNavOpen] = useState(false);
 
   return (
-    <Router>
+    <><SeoHead /><Router>
       <div className="relative bg-gradient-to-br from-[#2b2b2b] to-[#1a1a1a] min-h-screen overflow-hidden text-gray-200">
         <style>
           {`@keyframes equalizer {0%,100%{transform:scaleY(0.5)}50%{transform:scaleY(1)}}`}
         </style>
         <header className="relative z-10">
-  <nav className="flex flex-col sm:flex-row items-center justify-between px-4 py-3 sm:px-6 lg:px-8 bg-[#1c1c1c]">
-    <div className="flex items-center justify-between w-full sm:w-auto">
-      <div className="text-xl font-bold text-gray-200">A &amp; M Audio</div>
-      <button
-        onClick={() => setNavOpen(!navOpen)}
-        className="sm:hidden text-gray-200"
-        aria-label="Toggle menu"
-      >
-        {navOpen ? '✕' : '☰'}
-      </button>
-    </div>
+          <nav className="flex flex-col sm:flex-row items-center justify-between px-4 py-3 sm:px-6 lg:px-8 bg-[#1c1c1c]">
+            <div className="flex items-center justify-between w-full sm:w-auto">
+              <div className="text-xl font-bold text-gray-200">A &amp; M Audio</div>
+              <button
+                onClick={() => setNavOpen(!navOpen)}
+                className="sm:hidden text-gray-200"
+                aria-label="Toggle menu"
+              >
+                {navOpen ? '✕' : '☰'}
+              </button>
+            </div>
 
-    {/* This <ul> now lives in the normal flow, so opening it pushes content down */}
-    <ul
-      className={`transition-all duration-300 ease-in-out
+            {/* This <ul> now lives in the normal flow, so opening it pushes content down */}
+            <ul
+              className={`transition-all duration-300 ease-in-out
         overflow-hidden
         ${navOpen ? 'max-h-screen py-4' : 'max-h-0'}
         sm:max-h-full sm:py-0
         sm:flex sm:flex-row sm:space-x-6`}
-    >
-      {navItems.map(({ label, path }) => (
-        <li key={path} className="px-2">
-          <NavLink
-            to={path}
-            className={({ isActive }) =>
-              `block text-gray-200 ${
-                isActive ? 'text-red-500' : 'hover:text-red-500'
-              }`
-            }
-            onClick={() => setNavOpen(false)}
-          >
-            {label}
-          </NavLink>
-        </li>
-      ))}
-    </ul>
-  </nav>
-</header>
+            >
+              {navItems.map(({ label, path }) => (
+                <li key={path} className="px-2">
+                  <NavLink
+                    to={path}
+                    className={({ isActive }) => `block text-gray-200 ${isActive ? 'text-red-500' : 'hover:text-red-500'}`}
+                    onClick={() => setNavOpen(false)}
+                  >
+                    {label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </header>
 
 
         <main className="pt-8">
@@ -467,6 +465,6 @@ export default function AandMAudioSite() {
           </Routes>
         </main>
       </div>
-    </Router>
+    </Router></>
   );
 }
