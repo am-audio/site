@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaBullhorn, FaMusic, FaTv, FaCameraRetro, FaSlidersH, FaVideo } from 'react-icons/fa';
+import { FaTv, FaBullhorn, FaBolt, FaMusic, FaCameraRetro, FaSlidersH, FaVideo, FaBoxOpen } from 'react-icons/fa';
 import {
   BrowserRouter as Router,
   Routes,
@@ -31,12 +31,100 @@ function Equalizer() {
 }
 
 const SERVICES = [
-  { icon: <FaBullhorn size={32} />, title: 'Sub & Amp Install' },
-  { icon: <FaMusic size={32} />, title: 'Speaker Upgrade' },
-  { icon: <FaTv size={32} />, title: 'Head Unit Install' },
-  { icon: <FaCameraRetro size={32} />, title: 'Backup Camera' },
-  { icon: <FaSlidersH size={32} />, title: 'System Tuning' },
-  { icon: <FaVideo size={32} />, title: 'Virtual Audio Consult' }
+  {
+    icon: <FaTv size={32} />,
+    title: 'Head Unit Install',
+    price: '$100',
+    link: 'https://calendly.com/austinlm132/head-unit-install',
+    description: "Swap out your factory radio for a modern aftermarket receiver—complete with hands-free Bluetooth, Apple CarPlay/Android Auto, and premium sound controls. We handle removal of the old unit, secure mounting of the new head unit, all wiring and harness integration, and a full functionality test so you drive away ready to rock."
+  },
+  {
+    icon: <FaBullhorn size={32} />,
+    title: 'Sub & Amp Install',
+    price: '$150',
+    link: 'https://calendly.com/austinlm132/sub-amp-install',
+    description: "Bring the bass back to your ride with a professional subwoofer and amplifier installation. We’ll custom-mount your sub enclosure, run power and remote wiring, set up the amp’s gain and crossover, and fine-tune levels for deep, distortion-free low end that transforms your listening experience."
+  },
+  {
+    icon: <FaBolt size={32} />,
+    title: '4-Channel Amp Install',
+    price: '$150',
+    link: 'https://calendly.com/austinlm132/4-channel-amp-install',
+    description: "Boost your speakers’ power with a dedicated 4-channel amplifier installation. This service includes expert placement and secure mounting of the amp, factory-style wiring harness integration, and gain structure calibration—delivering cleaner, louder sound to each door speaker without overtaxing your car’s electrical system."
+  },
+  {
+    icon: <FaBolt size={32} />,
+    title: '5-Channel Amp Install',
+    price: '$150',
+    link: 'https://calendly.com/austinlm132/5-channel-amp-install',
+    description: "Upgrade both your subwoofer and door speakers in one go: a single 5-channel amp feeds four speakers plus your sub. We handle optimal amp placement, power/ground harness installation, line-output conversion, and initial tuning—so every channel performs at peak clarity and punch."
+  },
+  {
+    icon: <FaMusic size={32} />,
+    title: 'Speaker Upgrade (All 4 Doors)',
+    price: '$150',
+    link: 'https://calendly.com/austinlm132/speaker-upgrade-all-4-doors',
+    description: "Replace worn-out factory speakers with premium, unmatched clarity in every door. This service covers removal of existing speakers, installation of high-performance aftermarket units with proper baffling, secure mounting, and a sound demo—unlocking fuller mids and highs for a richer in-car audio experience."
+  },
+  {
+    icon: <FaCameraRetro size={32} />,
+    title: 'Backup Camera',
+    price: '$100',
+    link: 'https://calendly.com/austinlm132/backup-camera-install',
+    description: "See what’s behind you in real time with a professional backup-camera install. We’ll mount and waterproof the camera, route the video cable to your display, integrate it seamlessly into your dash, and calibrate the image—so reversing has never been safer or simpler. NOTE: Requires an aftermarket head unit with a video-input port."
+  },
+  {
+    icon: <FaSlidersH size={32} />,
+    title: 'System Tuning',
+    price: '$60',
+    link: 'https://calendly.com/austinlm132/system-tuning',
+    description: "Get the absolute best from your aftermarket audio gear with a dedicated tuning session. We’ll adjust crossovers, time alignment, EQ, and gain settings on your existing system to eliminate distortion, balance frequency response, and deliver studio-quality sound—tailored to your vehicle’s acoustics."
+  },
+  {
+    icon: <FaVideo size={32} />,
+    title: 'Virtual Audio Consult (30 min)',
+    price: '$20',
+    link: 'https://calendly.com/austinlm132/virtual-audio-consult-30-min',
+    description: "Not sure what upgrade is right for you? Book a 30-minute one-on-one video session to discuss your goals, budget, and vehicle. We’ll recommend gear, wiring solutions, and installation strategies, then send you a custom quote—so you can upgrade with confidence."
+  }
+];
+
+const BUNDLES = [
+  {
+    icon: <FaBoxOpen size={32} />,
+    title: 'Radio & Bass Combo',
+    price: '$150',
+    link: 'https://calendly.com/austinlm132/radio-bass-combo',
+    description: "Our best-selling duo: a brand-new head unit plus a subwoofer & amp install in one streamlined appointment. You’ll enjoy modern connectivity up front and earth-shaking low end in the back—all professionally installed, wired, and tuned for seamless performance."
+  },
+  {
+    icon: <FaBoxOpen size={32} />,
+    title: 'Head Unit & Backup',
+    price: '$150',
+    link: 'https://calendly.com/austinlm132/head-unit-backup-camera-install',
+    description: "Combine a state-of-the-art radio upgrade with a full backup-camera install. We’ll enhance your dash with Bluetooth/CarPlay functionality and add a high-definition camera to your rear bumper—so you get both hands-free audio and safe reversing in a single visit."
+  },
+  {
+    icon: <FaBoxOpen size={32} />,
+    title: 'Head Unit & Speakers',
+    price: '$200',
+    link: 'https://calendly.com/austinlm132/head-unit-speakers-install',
+    description: "Upgrade your dash and your doors together: a new head unit plus premium speakers in all four doors. Expect crystal-clear audio from your receiver, lifelike mids and highs from your door speakers, and expert wiring/integration for a cohesive, immersive soundstage."
+  },
+  {
+    icon: <FaBoxOpen size={32} />,
+    title: 'Complete Audio Upgrade',
+    price: '$250',
+    link: 'https://calendly.com/austinlm132/complete-audio-upgrade',
+    description: "The all-around overhaul that covers your core gear: head unit install, subwoofer & amp install, plus full 4-door speaker replacement. It’s everything you need for a dramatic audio overhaul—professionally installed and ready to transform every drive. NOTE: Does not include 4-channel amp install."
+  },
+  {
+    icon: <FaBoxOpen size={32} />,
+    title: 'True Complete Audio Upgrade',
+    price: '$300',
+    link: 'https://calendly.com/austinlm132/true-complete-audio-upgrade',
+    description: "Our ultimate package: head unit, speaker upgrade in all doors, plus a 5-channel amplifier feeding both your door speakers and subwoofer. You get top-tier power distribution, crystal-clear speakers, and the latest radio tech—all installed, wired, and tuned to perfection."
+  }
 ];
 
 const MY_PICKS = {
@@ -98,23 +186,10 @@ const MY_PICKS = {
   }
 };
 
-
-const PRICING = [
-  { service: "Sub & Amp Install", price: "$150" },
-  { service: "Door Speaker Install (Front Only)", price: "$90" },
-  { service: "Door Speaker Install (Rear Only)", price: "$90" },
-  { service: "Door Speaker Install (Front & Rear)", price: "$150" },
-  { service: "Head Unit Install", price: "$100" },
-  { service: "Backup Camera Install", price: "$100" },
-  { service: "Troubleshooting / Tuning", price: "$60 (flat rate)" },
-  { service: "Virtual Audio Consult", price: "$20 for 30 minutes" },
-];
-
 const navItems = [
   { label: "Home", path: "/" },
   { label: "Services", path: "/services" },
   { label: "My Picks", path: "/mypicks" },
-  { label: "Pricing", path: "/pricing" },
   { label: "Contact", path: "/contact" },
   { label: "About Me", path: "/about" },
 ];
@@ -163,20 +238,51 @@ function LandingPage() {
   );
 }
 
-
 function Services() {
   return (
     <div className="container mx-auto px-4 py-12 text-gray-200">
-      <h2 className="text-2xl md:text-4xl mb-6">Our Services</h2>
-      <div className="grid md:grid-cols-2 gap-6 mb-8">
+      <h2 className="text-3xl md:text-5xl mb-4">Our Services</h2>
+      <p className="mb-6">Click any of the cards below to book your desired service or bundle with A & M Audio.</p>
+      <h3 className="text-2xl md:text-3xl mb-3">Individual Services</h3>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {SERVICES.map((s, i) => (
-          <div
+          <a
             key={i}
-            className="flex items-center space-x-4 p-4 bg-[#2a2a2a] rounded-lg"
+            href={s.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
           >
-            <span className="text-3xl">{s.icon}</span>
-            <span className="text-lg">{s.title}</span>
-          </div>
+            <div className="flex flex-col p-4 bg-[#2a2a2a] hover:bg-gray-700 rounded-lg transition">
+              <div className="flex items-center space-x-4 mb-2">
+                <span className="text-3xl">{s.icon}</span>
+                <span className="text-xl font-semibold">{s.title}</span>
+                <span className="ml-auto text-lg font-medium">{s.price}</span>
+              </div>
+              <p className="text-sm">{s.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+      <h3 className="text-2xl md:text-3xl mb-3">Bundle Deals</h3>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {BUNDLES.map((b, i) => (
+          <a
+            key={i}
+            href={b.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
+          >
+            <div className="flex flex-col p-4 bg-[#2a2a2a] hover:bg-gray-700 rounded-lg transition">
+              <div className="flex items-center space-x-4 mb-2">
+                <span className="text-3xl">{b.icon}</span>
+                <span className="text-xl font-semibold">{b.title}</span>
+                <span className="ml-auto text-lg font-medium">{b.price}</span>
+              </div>
+              <p className="text-sm">{b.description}</p>
+            </div>
+          </a>
         ))}
       </div>
       <Equalizer />
@@ -230,7 +336,6 @@ function MyPicks() {
   );
 }
 
-
 function About() {
   return (
     <div className="container mx-auto px-4 py-12 text-gray-200">
@@ -245,31 +350,6 @@ function About() {
         <li>Expert sub/amp and head unit installations</li>
         <li>Clean, hidden wiring and custom tuning</li>
       </ul>
-      <Equalizer />
-    </div>
-  );
-}
-
-function Pricing() {
-  return (
-    <div className="container mx-auto px-4 py-12 text-gray-200">
-      <h2 className="text-2xl md:text-4xl mb-6">Pricing</h2>
-      <table className="w-full text-left mb-8">
-        <thead>
-          <tr className="border-b border-gray-700">
-            <th className="pb-2">Service</th>
-            <th className="pb-2">Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {PRICING.map((item, idx) => (
-            <tr key={idx} className="border-b border-gray-700">
-              <td className="py-2">{item.service}</td>
-              <td className="py-2">{item.price}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
       <Equalizer />
     </div>
   );
@@ -381,7 +461,6 @@ export default function AandMAudioSite() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/services" element={<Services />} />
             <Route path="/mypicks" element={<MyPicks />} />
-            <Route path="/pricing" element={<Pricing />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
             <Route path="*" element={<Navigate to="/" replace />} />
