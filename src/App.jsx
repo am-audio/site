@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Helmet } from 'react-helmet';
 import { FaTv, FaBullhorn, FaBolt, FaMusic, FaCameraRetro, FaSlidersH, FaVideo, FaBoxOpen } from 'react-icons/fa';
 import {
   BrowserRouter as Router,
