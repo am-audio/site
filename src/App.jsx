@@ -165,25 +165,41 @@ const MY_PICKS = {
       }
     ]
   },
+  "Mid Tier": {
+    Speakers: [
+      {
+        name: "Memphis Audio PRX603",
+        link: "https://amzn.to/3GR20Zy"
+      }
+    ]
+  },
   Budget: {
     Speakers: [
       {
         name: "Kicker 46CSC654",
-        link:"https://www.amazon.com/Kicker-46CSC654-Component-Speakers/dp/B01M8POT5C?tag=amaudio614-20"
+        link:"https://amzn.to/43o8KXw"
+      },
+      {
+        name: "Rockford Fosgate P1694",
+        link:"https://amzn.to/4mq09eG"
+      },
+      {
+        name: "Memphis Audio SRX52V",
+        link: "https://amzn.to/3YF4oZD"
       }
     ],
     Amplifiers: [
       {
-        name: "Rockford Fosgate P1694",
-        link:"https://www.amazon.com/Rockford-Fosgate-P1694-Speaker-Black/dp/B00TS2ZZL0?tag=amaudio614-20"
+        name: "Memphis Audio SE1000.1V2",
+        link:"https://amzn.to/3S0oUQz"
       }
     ],
     "Head Units": [
       {
-        name: "Pioneer TS-A1670F",
-        link:"https://www.amazon.com/Pioneer-TS-A1670F-6-5-Inch-Component-Speaker/dp/B00NEK90FM?tag=amaudio614-20"
+        name: "Pioneer MVH-S230BT",
+        link:"https://amzn.to/3RVXvzh"
       }
-    ]
+    ],
   }
 };
 
