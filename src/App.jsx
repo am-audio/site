@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaTv, FaBullhorn, FaBolt, FaMusic, FaCameraRetro, FaSlidersH, FaVideo, FaBoxOpen } from 'react-icons/fa';
+import { FaTv, FaBullhorn, FaBolt, FaMusic, FaCameraRetro, FaSlidersH, FaVideo, FaBoxOpen, FaImages } from 'react-icons/fa';
 import {
   BrowserRouter as Router,
   Routes,
@@ -203,10 +203,16 @@ const MY_PICKS = {
   }
 };
 
+// Placeholder array for installation images; place your images in public/installations/
+const INSTALLATION_PICS = [
+  '/install1.jpeg'
+];
+
 const navItems = [
   { label: "Home", path: "/" },
   { label: "Services", path: "/services" },
   { label: "My Picks", path: "/mypicks" },
+  { label: "Pictures", path: "/pictures" },
   { label: "Contact", path: "/contact" },
   { label: "About Me", path: "/about" },
 ];
@@ -353,6 +359,28 @@ function MyPicks() {
   );
 }
 
+function InstallPictures() {
+  return (
+    <div className="container mx-auto px-4 py-12 text-gray-200">
+      <h2 className="text-2xl md:text-4xl mb-6 flex items-center space-x-2">
+        <FaImages size={28} />
+        <span>Installation Pictures</span>
+      </h2>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {INSTALLATION_PICS.map((src, idx) => (
+          <img
+            key={idx}
+            src={src}
+            alt={`Installation ${idx + 1}`}
+            className="rounded-lg shadow-lg w-full h-auto object-cover"
+          />
+        ))}
+      </div>
+      <Equalizer />
+    </div>
+  );
+}
+
 function About() {
   return (
     <div className="container mx-auto px-4 py-12 text-gray-200">
@@ -474,6 +502,7 @@ export default function AandMAudioSite() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/services" element={<Services />} />
             <Route path="/mypicks" element={<MyPicks />} />
+            <Route path="/pictures" element={<InstallPictures />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
             <Route path="*" element={<Navigate to="/" replace />} />
