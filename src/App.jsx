@@ -36,57 +36,57 @@ const SERVICES = [
     icon: <FaTv size={32} />,
     title: 'Head Unit Install',
     price: '$100',
-    link: 'https://calendly.com/austinlm132/head-unit-install',
+    link: 'https://amaudio.zohobookings.com/#/4776173000000044052',
     description: "Swap out your factory radio for a modern aftermarket receiver—complete with hands-free Bluetooth, Apple CarPlay/Android Auto, and premium sound controls. We handle removal of the old unit, secure mounting of the new head unit, all wiring and harness integration, and a full functionality test so you drive away ready to rock."
   },
   {
     icon: <FaBullhorn size={32} />,
     title: 'Sub & Amp Install',
     price: '$150',
-    link: 'https://calendly.com/austinlm132/sub-amp-install',
+    link: 'https://amaudio.zohobookings.com/#/4776173000000044196',
     description: "Bring the bass back to your ride with a professional subwoofer and amplifier installation. We’ll custom-mount your sub enclosure, run power and remote wiring, set up the amp’s gain and crossover, and fine-tune levels for deep, distortion-free low end that transforms your listening experience."
   },
   {
     icon: <FaBolt size={32} />,
     title: '4-Channel Amp Install',
     price: '$150',
-    link: 'https://calendly.com/austinlm132/4-channel-amp-install',
+    link: 'https://amaudio.zohobookings.com/#/4776173000000044230',
     description: "Boost your speakers’ power with a dedicated 4-channel amplifier installation. This service includes expert placement and secure mounting of the amp, factory-style wiring harness integration, and gain structure calibration—delivering cleaner, louder sound to each door speaker without overtaxing your car’s electrical system."
   },
   {
     icon: <FaBolt size={32} />,
     title: '5-Channel Amp Install',
     price: '$150',
-    link: 'https://calendly.com/austinlm132/5-channel-amp-install',
+    link: 'https://amaudio.zohobookings.com/#/4776173000000044264',
     description: "Upgrade both your subwoofer and door speakers in one go: a single 5-channel amp feeds four speakers plus your sub. We handle optimal amp placement, power/ground harness installation, line-output conversion, and initial tuning—so every channel performs at peak clarity and punch."
   },
   {
     icon: <FaMusic size={32} />,
     title: 'Speaker Upgrade (All 4 Doors)',
     price: '$150',
-    link: 'https://calendly.com/austinlm132/speaker-upgrade-all-4-doors',
+    link: 'https://amaudio.zohobookings.com/#/4776173000000044298',
     description: "Replace worn-out factory speakers with premium, unmatched clarity in every door. This service covers removal of existing speakers, installation of high-performance aftermarket units with proper baffling, secure mounting, and a sound demo—unlocking fuller mids and highs for a richer in-car audio experience."
   },
   {
     icon: <FaCameraRetro size={32} />,
     title: 'Backup Camera',
     price: '$100',
-    link: 'https://calendly.com/austinlm132/backup-camera-install',
+    link: 'https://amaudio.zohobookings.com/#/4776173000000044162',
     description: "See what’s behind you in real time with a professional backup-camera install. We’ll mount and waterproof the camera, route the video cable to your display, integrate it seamlessly into your dash, and calibrate the image—so reversing has never been safer or simpler. NOTE: Requires an aftermarket head unit with a video-input port."
   },
   {
     icon: <FaSlidersH size={32} />,
     title: 'System Tuning',
     price: '$60',
-    link: 'https://calendly.com/austinlm132/system-tuning',
+    link: 'https://amaudio.zohobookings.com/#/4776173000000044434',
     description: "Get the absolute best from your aftermarket audio gear with a dedicated tuning session. We’ll adjust crossovers, time alignment, EQ, and gain settings on your existing system to eliminate distortion, balance frequency response, and deliver studio-quality sound—tailored to your vehicle’s acoustics."
   },
   {
     icon: <FaVideo size={32} />,
-    title: 'Virtual Audio Consult (30 min)',
+    title: 'Recommendation Consult (30 min)',
     price: '$20',
-    link: 'https://calendly.com/austinlm132/virtual-audio-consult-30-min',
-    description: "Not sure what upgrade is right for you? Book a 30-minute one-on-one video session to discuss your goals, budget, and vehicle. We’ll recommend gear, wiring solutions, and installation strategies, then send you a custom quote—so you can upgrade with confidence."
+    link: 'https://amaudio.zohobookings.com/#/4776173000000044400',
+    description: "Not sure what upgrade is right for you? Book a 30-minute one-on-one session to discuss your goals, budget, and vehicle. We’ll recommend gear, wiring solutions, and installation strategies, then send you a custom quote—so you can upgrade with confidence."
   }
 ];
 
